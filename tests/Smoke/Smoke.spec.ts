@@ -71,7 +71,7 @@ test.describe("User can login", () => {
     })
   });
 
-  test("Login with created credentials", async ({ page }) => {
+  test("User can login  with created credentials", async ({ page }) => {
     let emailTB: Locator = page
       .locator("form")
       .filter({ hasText: "Login" })
