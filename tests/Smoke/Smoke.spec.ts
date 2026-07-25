@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker";
 
 const burl: string = "https://automationexercise.com";
 
-test.describe("Login", () => {
+test.describe("User can login", () => {
   test("Page has title", async ({ page }) => {
     await test.step('When I go to page', async () => {
       await page.goto(burl);

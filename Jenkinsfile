@@ -1,18 +1,21 @@
 pipeline {
+    // Define el pipeline principal de Jenkins.
     agent any
 
     tools {
-        // Cambia 'NodeJS' por 'Node' (o el nombre exacto que le diste en la configuración)
-        nodejs 'Node'
+        // Indica que se usará Node.js para ejecutar los comandos del pipeline.
+        nodejs 'Node' //Nombre configurado en Jenkins
     }
 
     stages {
+        // Descarga el código del repositorio antes de ejecutar cualquier tarea.
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
+        // Instala las dependencias del proyecto y los componentes necesarios de Playwright.
         stage('Install Dependencies') {
             steps {
                 sh 'npm ci'
@@ -20,6 +23,7 @@ pipeline {
             }
         }
 
+        // Ejecuta las pruebas automatizadas de Playwright.
         stage('Run Playwright Tests') {
             steps {
                 sh 'npx playwright test'
@@ -28,6 +32,7 @@ pipeline {
     }
 
     post {
+        // Se ejecuta siempre, aunque las pruebas pasen o fallen.
         always {
             publishHTML(target: [
                 allowMissing: false,
@@ -38,6 +43,8 @@ pipeline {
                 reportName: 'Playwright HTML Report'
             ])
         }
+
+        // Muestra un mensaje si alguna prueba falla.
         failure {
             echo 'Las pruebas de Playwright han fallado.'
         }
