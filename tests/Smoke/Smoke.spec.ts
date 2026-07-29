@@ -2,8 +2,11 @@ import { test, expect, request, Locator } from "@playwright/test";
 import { faker } from "@faker-js/faker";
 
 const burl: string = "https://automationexercise.com";
+let email: string = "";
+let pwd: string = "";
 
 test.describe("User can login", () => {
+
   test("Page has title", async ({ page }) => {
     await test.step('When I go to page', async () => {
       await page.goto(burl);
@@ -64,8 +67,20 @@ test.describe("User can login", () => {
           },
         },
       );
-      console.log(userData);
+
       console.log(await resp.json());
+      console.log(userData);
+
+      const responseCheck = await request.get(`https://automationexercise.com/api/getUserDetailByEmail?email=${userData.email}`);
+      const respCheckJsonBody = await responseCheck.json();
+      email = respCheckJsonBody.user.email;
+      pwd = userData.password;
+
+      console.log(await responseCheck.json());
+      console.log(respCheckJsonBody);
+      console.log(email);
+      console.log(pwd);
+
     })
     await test.step('', async () => {
     })
@@ -102,8 +117,8 @@ test.describe("User can login", () => {
     })
 
     await test.step('When I enter credential and click Login button', async () => {
-      await emailTB.fill("Briana_Satterfield18@yahoo.com");
-      await pwdTb.fill("LyipDLFUuircCLh");
+      await emailTB.fill(email);
+      await pwdTb.fill(pwd);
       await loginBt.click();
     })
 
