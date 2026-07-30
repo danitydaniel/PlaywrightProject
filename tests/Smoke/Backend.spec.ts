@@ -5,7 +5,7 @@ const url: string = "https://jsonplaceholder.typicode.com/users";
 test.describe('Validate title', () => {
 
     test("Web page is accessible", async ({ page }) => {
-        
+
         await test.step('When I go to page', async () => {
             await page.goto('');
         })
@@ -18,7 +18,7 @@ test.describe('Validate title', () => {
     });
 });
 
-test.describe.skip('API tests', () => {
+test.describe('API tests', () => {
     test('', async ({ request }) => {
         const response = await request.get(url);
         const jsonBody = await response.json();
