@@ -1,9 +1,13 @@
-class basePage{
-    url: String;
-    title: String;
+import { Page, Locator } from '@playwright/test';
 
-    constructor(url :string, title: string){
-        this.url=url;
-        this.title=title;
+export class basePage {
+    page: Page;
+    url: string;
+    title: string;
+
+    constructor(page: Page, url: string, title: string) {
+        this.page = page;
+        this.url = url;
+        this.title = title;
     }
 }

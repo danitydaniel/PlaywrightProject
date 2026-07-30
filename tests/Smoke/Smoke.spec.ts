@@ -1,5 +1,6 @@
 import { test, expect, request, Locator } from "@playwright/test";
 import { faker } from "@faker-js/faker";
+import { homePage } from "../Pages/homePage";
 
 const burl: string = "https://automationexercise.com";
 let email: string = "";
@@ -81,23 +82,17 @@ test.describe("User can login", () => {
   });
 
   test("User can login  with created credentials", async ({ page }) => {
-    let emailTB: Locator = page
-      .locator("form")
-      .filter({ hasText: "Login" })
-      .getByPlaceholder("Email Address");
-    let pwdTb: Locator = page.getByRole("textbox", { name: "Password" });
-    let loginLink: Locator = page.getByRole("link", { name: "Signup / Login" });
-    let logoutLink: Locator = page.getByRole("link", { name: "Logout" });
-    let loginBt: Locator = page.getByRole("button", { name: "Login" });
+    
+    const home: homePage = new homePage(page);
 
     await test.step('When I go to page', async () => {
-      await page.goto(burl);
+      await page.goto(home.url);
     })
 
 
     await test.step('When I click Login link', async () => {
       // Click the get started link.
-      await loginLink.click();
+      await home.loginLink.click();
     })
 
     await test.step('Then I expect page to have title', async () => {
@@ -106,18 +101,18 @@ test.describe("User can login", () => {
     })
 
     await test.step('Then I expect to see user and password textbox', async () => {
-      await expect(emailTB).toBeVisible;
-      await expect(pwdTb).toBeVisible;
+      await expect(home.emailTB).toBeVisible;
+      await expect(home.pwdTb).toBeVisible;
     })
 
     await test.step('When I enter credential and click Login button', async () => {
-      await emailTB.fill(email);
-      await pwdTb.fill(pwd);
-      await loginBt.click();
+      await home.emailTB.fill(email);
+      await home.pwdTb.fill(pwd);
+      await home.loginBt.click();
     })
 
     await test.step('Then I expect to see Logout link', async () => {
-      await expect(logoutLink).toBeVisible();
+      await expect(home.logoutLink).toBeVisible();
     })
 
     await page.close();
