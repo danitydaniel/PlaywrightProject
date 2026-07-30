@@ -3,6 +3,12 @@ import { faker } from "@faker-js/faker";
 
 const burl: string = "https://automationexercise.com";
 
+test.beforeEach(async ({ page }) => {
+  await page.route('**/*doubleclick.net/**', route => route.abort());
+  await page.route('**/*googlesyndication.com/**', route => route.abort());
+  await page.route('**/*googleads*/**', route => route.abort());
+});
+
 test("Page has title", async ({ page }) => {
   await page.goto(burl);
 

@@ -5,6 +5,12 @@ const burl: string = "https://automationexercise.com";
 let email: string = "";
 let pwd: string = "";
 
+test.beforeEach(async ({ page }) => {
+  await page.route('**/*doubleclick.net/**', route => route.abort());
+  await page.route('**/*googlesyndication.com/**', route => route.abort());
+  await page.route('**/*googleads*/**', route => route.abort());
+});
+
 test.describe("User can login", () => {
 
   test("Endpoint can create a new user", async ({ request }) => {
@@ -91,7 +97,7 @@ test.describe("User can login", () => {
 
     await test.step('When I click Login link', async () => {
       // Click the get started link.
-      loginLink.click();
+      await loginLink.click();
     })
 
     await test.step('Then I expect page to have title', async () => {
