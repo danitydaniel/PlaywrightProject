@@ -7,18 +7,6 @@ let pwd: string = "";
 
 test.describe("User can login", () => {
 
-  test("Page has title", async ({ page }) => {
-    await test.step('When I go to page', async () => {
-      await page.goto(burl);
-    })
-
-    await test.step('Then I expect to see tittle', async () => {
-      // Expect a title "to contain" a substring.
-      await expect(page).toHaveTitle("Automation Exercise");
-    })
-    page.close();
-  });
-
   test("Endpoint can create a new user", async ({ request }) => {
     await test.step('Given I set the user data', async () => {
       const birthDate = faker.date.birthdate({ min: 18, max: 65, mode: "age" });

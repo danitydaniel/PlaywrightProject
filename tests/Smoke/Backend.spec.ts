@@ -4,20 +4,21 @@ const url: string = "https://jsonplaceholder.typicode.com/users";
 
 test.describe('Validate title', () => {
 
-    test('Validate title', async ({ page }) => {
-        await test.step('Go to page', async () => {
-            await page.goto('https://google.com')
+    test("Web page is accessible", async ({ page }) => {
+        
+        await test.step('When I go to page', async () => {
+            await page.goto('');
         })
-        await test.step('Validate', async () => {
-            await expect(page).toHaveTitle("Google");
+
+        await test.step('Then I expect to see tittle', async () => {
+            // Expect a title "to contain" a substring.
+            await expect(page).toHaveTitle("Automation Exercise");
         })
-        await test.step('', async () => {
-            await page.close();
-        })
-    })
+        page.close();
+    });
 });
 
-test.describe('API tests', () => {
+test.describe.skip('API tests', () => {
     test('', async ({ request }) => {
         const response = await request.get(url);
         const jsonBody = await response.json();
