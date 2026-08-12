@@ -4,7 +4,7 @@ pipeline {
 
     tools {
         // Indica que se usará Node.js para ejecutar los comandos del pipeline.
-        nodejs 'Node' //Nombre configurado en Jenkins
+        nodejs 'node24-lts' //Nombre configurado en Jenkins
     }
 
     stages {
