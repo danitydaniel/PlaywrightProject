@@ -14,14 +14,6 @@ pipeline {
                 checkout scm
             }
         }
-
-        // Instala las dependencias del proyecto y los componentes necesarios de Playwright.
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm ci'
-                sh 'npx playwright install --with-deps'
-            }
-        }
         stage('Check node version'){
             steps{
                 sh 'node -v'
@@ -29,6 +21,14 @@ pipeline {
                 sh 'cat package-lock.json | grep -A2 "@emnapi/core"'
             }
         }
+        // Instala las dependencias del proyecto y los componentes necesarios de Playwright.
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm ci'
+                sh 'npx playwright install --with-deps'
+            }
+        }
+        
 
         // Ejecuta las pruebas automatizadas de Playwright.
         stage('Run Playwright Tests') {
