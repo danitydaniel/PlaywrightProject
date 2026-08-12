@@ -22,6 +22,13 @@ pipeline {
                 sh 'npx playwright install --with-deps'
             }
         }
+        stage('Check node version'){
+            steps{
+                sh 'node -v'
+                sh 'npm -v'
+                sh 'cat package-lock.json | grep -A2 "@emnapi/core"'
+            }
+        }
 
         // Ejecuta las pruebas automatizadas de Playwright.
         stage('Run Playwright Tests') {
