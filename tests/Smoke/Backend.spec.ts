@@ -3,7 +3,7 @@ import { test, expect, request } from '@playwright/test';
 const url: string = "https://automationexercise.com/api/brandsList";
 
 
-test.describe.only('Web page is reachable', () => {
+test.describe('Web page is reachable', () => {
 
     test("Web page is displayed", async ({ page }) => {
 
@@ -37,4 +37,18 @@ test.describe.only('Web page is reachable', () => {
         console.log(second);
 
     });
+
+    test.only('Get web page', async ({ page, request }) => {
+        const start = Date.now();
+        const response = await request.get('https://automationexercise.com');
+        const duration = Date.now() - start;
+
+        expect(response.ok()).toBeTruthy();
+        expect(duration).toBeLessThan(3000); // menos de 3 segundos
+        expect(response.status()).toBe(200);
+        console.log(duration);
+
+
+    })
+
 });
