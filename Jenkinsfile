@@ -14,13 +14,13 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Check node version'){
-            steps{
-                sh 'node -v'
-                sh 'npm -v'
-                sh 'cat package-lock.json | grep -A2 "@emnapi/core"'
-            }
-        }
+        // stage('Check node version'){
+        //     steps{
+        //         sh 'node -v'
+        //         sh 'npm -v'
+        //         sh 'cat package-lock.json | grep -A2 "@emnapi/core"'
+        //     }
+        // }
         // Instala las dependencias del proyecto y los componentes necesarios de Playwright.
         stage('Install Dependencies') {
             steps {
