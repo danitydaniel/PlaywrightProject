@@ -38,7 +38,7 @@ test.describe('Web page is reachable', () => {
 
     });
 
-    test.only('Get web page', async ({ page, request }) => {
+    test('Get web page', async ({ page, request }) => {
         const start = Date.now();
         const response = await request.get('https://automationexercise.com');
         const duration = Date.now() - start;
