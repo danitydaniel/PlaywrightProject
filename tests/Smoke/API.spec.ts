@@ -7,5 +7,4 @@ test('API test 1', async ({ page, request }) => {
         expect(await call.status()).toBe(200);
         expect(await call.statusText()).toBe("OK");
     })
-
 })
